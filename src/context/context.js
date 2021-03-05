@@ -3,7 +3,6 @@ import mockUser from './mockData.js/mockUser';
 import mockRepos from './mockData.js/mockRepos';
 import mockFollowers from './mockData.js/mockFollowers';
 import axios from 'axios';
-import Followers from '../components/Followers';
 
 const rootUrl = 'https://api.github.com';
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import FusionCharts from 'fusioncharts';
 import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';

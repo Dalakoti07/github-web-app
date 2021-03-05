@@ -7,8 +7,7 @@ const Navbar = () => {
     isAuthenticated,
     loginWithRedirect,
     logout,
-    user,
-    isLoading
+    user
   }=useAuth0()
 
   const isUser=isAuthenticated && user;
