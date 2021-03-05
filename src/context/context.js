@@ -3,6 +3,7 @@ import mockUser from './mockData.js/mockUser';
 import mockRepos from './mockData.js/mockRepos';
 import mockFollowers from './mockData.js/mockFollowers';
 import axios from 'axios';
+import Followers from '../components/Followers';
 
 const rootUrl = 'https://api.github.com';
 
@@ -27,12 +28,18 @@ const GithubProvider=({children})=>{
         if(reponse){
             setGithubUser(reponse.data)
             const {login,followers_url}=reponse.data;
-            //repos
-            axios(`${rootUrl}/users/${login}/repos?per_page=100`)
-                .then(reponse=> setRepos(reponse.data))
-            
+
+            await Promise.allSettled([
+            axios(`${rootUrl}/users/${login}/repos?per_page=100`),
             axios(`${followers_url}?per_page=100`)
-                .then(reponse=> setFollowers(reponse.data))
+            ]).then(result=> {
+                const [repos,followers]=result;
+                const status='fulfilled';
+                if(repos.status===status)
+                    setRepos(repos.value.data)
+                if(followers.status===status)
+                    setFollowers(followers.value.data)
+            }).catch(err=>console.log(err))
         }
         else
             toggleError(true,'There is no user with such username')
