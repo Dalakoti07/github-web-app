@@ -22,14 +22,14 @@ const Repos = () => {
   
   const mostUsed=Object.values(languages).sort((a,b)=>{
     return b.value-a.value;
-  })
+  }).slice(0,5)
 
   //most star per language
   const mostPopular=Object.values(languages).sort((a,b)=>{
     return b.stars-a.stars;
   }).map((item)=>{
     return {...item,value:item.stars};
-  })
+  }).slice(0,5)
   
   console.log(languages);
 
@@ -49,20 +49,6 @@ const Repos = () => {
   stars=Object.values(stars).slice(-5).reverse();
   forks=Object.values(forks).slice(-5).reverse();
 
-  const chartData= [
-    {
-      "label": "c++",
-      "value": "290"
-    },
-    {
-      "label": "python",
-      "value": "260"
-    },
-    {
-      "label": "javascript",
-      "value": "360"
-    }
-  ]
   return (
     <section className='section'>
       <Wrapper className='section-center'>
